@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบเสร็จ B Photo - ตัดต่อรีทัช รูปติดบัตร ออนไลน์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://html2canvas.herokuapp.com/dist/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Sarabun', sans-serif; }
+        .receipt-container { background: white; }
+        @media print {
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold text-blue-800 mb-2">B Photo</h1>
+                <p class="text-lg text-gray-600">ตัดต่อรีทัช รูปติดบัตร ออนไลน์</p>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mt-3 rounded"></div>
+            </div>
+        </div>
+
+        <!-- Receipt Container -->
+        <div id="receiptContainer" class="receipt-container rounded-lg shadow-lg p-6 mb-6">
+            <div class="border-b-2 border-blue-200 pb-4 mb-6">
+                <h2 class="text-2xl font-semibold text-center text-blue-800">ใบเสร็จรับเงิน</h2>
+                <p class="text-center text-gray-600 mt-2">Receipt</p>
+            </div>
+
+            <!-- Receipt Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-50">
+                            <th class="border border-gray-300 px-4 py-3 text-left font-semibold">รายการ</th>
+                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">จำนวน</th>
+                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">ราคา/บาท</th>
+                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">จำนวนเงิน</th>
+                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-16 no-print">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receiptTableBody">
+                        <!-- Rows will be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Shipping Row -->
+            <div class="mt-4">
+                <table class="w-full border-collapse border border-gray-300">
+                    <tbody>
+                        <tr id="shippingRow" class="bg-yellow-50 hidden">
+                            <td class="border border-gray-300 px-4 py-3">ค่าจัดส่งพัสดุ J&T Express</td>
+                            <td class="border border-gray-300 px-4 py-3 text-center">-</td>
+                            <td class="border border-gray-300 px-4 py-3 text-center">50</td>
+                            <td class="border border-gray-300 px-4 py-3 text-center">50</td>
+                            <td class="border border-gray-300 px-4 py-3 text-center no-print"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total Section -->
+            <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center text-xl font-semibold">
+                    <span>รวมทั้งหมด:</span>
+                    <span id="totalAmount">0 บาท</span>
+                </div>
+                <div class="mt-2 text-center text-gray-700">
+                    <span id="totalInThai">ศูนย์บาทถ้วน</span>
+                </div>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-semibold mb-4 text-blue-800 flex items-center">
+                    <span class="bg-blue-100 p-2 rounded-full mr-3">📋</span>
+                    สรุปรายการใบเสร็จ
+                </h3>
+                <div id="summaryList" class="text-gray-700">
+                    <div class="text-center py-8">
+                        <div class="text-6xl mb-4">📝</div>
+                        <p class="text-gray-500 italic text-lg">ยังไม่มีรายการที่เลือก</p>
+                        <p class="text-gray-400 text-sm mt-2">เลือกรายการเพื่อดูสรุปที่นี่</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="bg-white rounded-lg shadow-lg p-6 no-print">
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">เพิ่มรายการ</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">รายการ</label>
+                    <select id="itemSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">เลือกรายการ</option>
+                        <option value="ตัดต่อรูป ไฟล์ Jpg.|125|ไฟล์">ตัดต่อรูป ไฟล์ Jpg.</option>
+                        <option value="ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)|280|ไฟล์">ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)</option>
+                        <option value="อัดรูป 1 นิ้ว|20|โหล">อัดรูป 1 นิ้ว</option>
+                        <option value="อัดรูป 1.5 นิ้ว|25|โหล">อัดรูป 1.5 นิ้ว</option>
+                        <option value="อัดรูป 2 นิ้ว|30|โหล">อัดรูป 2 นิ้ว</option>
+                        <option value="อัดรูป 1x1.5 นิ้ว|30|โหล">อัดรูป 1x1.5 นิ้ว</option>
+                        <option value="อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)|30|โหล">อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)</option>
+                        <option value="อัดรูป 8 x 13 เซนติเมตร|5|รูป">อัดรูป 8 x 13 เซนติเมตร</option>
+                        <option value="อัดรูป 2x2 นิ้ว|30|โหล">อัดรูป 2x2 นิ้ว</option>
+                        <option value="อัดรูป 4x6 นิ้ว|5|รูป">อัดรูป 4x6 นิ้ว</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">จำนวน</label>
+                    <select id="quantitySelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">ราคา/บาท</label>
+                    <input type="number" id="priceInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly>
+                </div>
+                
+                <div class="flex items-end">
+                    <button id="addItemBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
+                        เพิ่มรายการ
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Custom Item Management -->
+            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                <h4 class="text-lg font-semibold mb-3 text-gray-800">จัดการรายการและราคา</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ชื่อรายการใหม่</label>
+                        <input type="text" id="customItemName" placeholder="เช่น อัดรูป 5x7 นิ้ว" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ราคา (บาท)</label>
+                        <input type="number" id="customItemPrice" placeholder="0" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">หน่วย</label>
+                        <select id="customItemUnit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="ไฟล์">ไฟล์</option>
+                            <option value="โหล">โหล</option>
+                            <option value="รูป">รูป</option>
+                            <option value="ชิ้น">ชิ้น</option>
+                            <option value="ครั้ง">ครั้ง</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex gap-2 mb-4">
+                    <button id="addCustomItemBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
+                        ➕ เพิ่มรายการใหม่
+                    </button>
+                    <button id="showCustomItemsBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
+                        📋 จัดการรายการที่มี
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex gap-4">
+                <button id="saveReceiptBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200">
+                    💾 บันทึกภาพ
+                </button>
+                <button id="clearAllBtn" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-md transition duration-200">
+                    🗑️ ล้างทั้งหมด
+                </button>
+            </div>
+        </div>
+
+        <!-- Custom Items Management Modal -->
+        <div id="customItemsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 no-print">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-96 overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold text-gray-800">จัดการรายการและราคา</h3>
+                            <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                        </div>
+                        <div id="customItemsList" class="space-y-2">
+                            <!-- Custom items will be listed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Receipt Summary Modal -->
+        <div id="receiptSummaryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 no-print">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-semibold text-blue-800">สรุปรายการใบเสร็จ</h3>
+                            <button id="closeSummaryModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                        </div>
+                        
+                        <!-- Summary Content -->
+                        <div id="modalSummaryContent" class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+                            <!-- Summary will be copied here -->
+                        </div>
+                        
+                        <!-- Modal Actions -->
+                        <div class="flex justify-center gap-4 mt-6">
+                            <button id="cancelSaveBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 text-lg">
+                                ❌ ปิด
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let receiptItems = [];
+        let itemCounter = 0;
+        let customItems = JSON.parse(localStorage.getItem('bphoto_custom_items')) || [];
+        let selectedReceiptData = JSON.parse(localStorage.getItem('bphoto_selected_receipt')) || [];
+
+        // Thai number conversion
+        const thaiNumbers = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+        const thaiUnits = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
+
+        function numberToThai(num) {
+            if (num === 0) return 'ศูนย์บาทถ้วน';
+            
+            let result = '';
+            let numStr = num.toString();
+            let len = numStr.length;
+            
+            for (let i = 0; i < len; i++) {
+                let digit = parseInt(numStr[i]);
+                let position = len - i - 1;
+                
+                if (digit !== 0) {
+                    if (position === 1 && digit === 1 && len > 1) {
+                        result += 'สิบ';
+                    } else if (position === 1 && digit === 2) {
+                        result += 'ยี่สิบ';
+                    } else if (digit === 1 && position === 0 && len > 1 && parseInt(numStr[i-1]) > 0) {
+                        result += 'เอ็ด';
+                    } else {
+                        result += thaiNumbers[digit];
+                        if (position > 0) {
+                            result += thaiUnits[position];
+                        }
+                    }
+                }
+            }
+            
+            return result + 'บาทถ้วน';
+        }
+
+        // Initialize custom items in dropdown
+        function updateItemDropdown() {
+            const itemSelect = document.getElementById('itemSelect');
+            const defaultOptions = itemSelect.innerHTML;
+            
+            // Clear and rebuild
+            itemSelect.innerHTML = '<option value="">เลือกรายการ</option>';
+            
+            // Add default items
+            const defaultItems = [
+                'ตัดต่อรูป ไฟล์ Jpg.|125|ไฟล์',
+                'ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)|280|ไฟล์',
+                'อัดรูป 1 นิ้ว|20|โหล',
+                'อัดรูป 1.5 นิ้ว|25|โหล',
+                'อัดรูป 2 นิ้ว|30|โหล',
+                'อัดรูป 1x1.5 นิ้ว|30|โหล',
+                'อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)|30|โหล',
+                'อัดรูป 8 x 13 เซนติเมตร|5|รูป',
+                'อัดรูป 2x2 นิ้ว|30|โหล',
+                'อัดรูป 4x6 นิ้ว|5|รูป'
+            ];
+            
+            defaultItems.forEach(item => {
+                const [name, price, unit] = item.split('|');
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = name;
+                itemSelect.appendChild(option);
+            });
+            
+            // Add custom items
+            customItems.forEach(item => {
+                const option = document.createElement('option');
+                option.value = `${item.name}|${item.price}|${item.unit}`;
+                option.textContent = `${item.name} (รายการที่เพิ่ม)`;
+                option.style.color = '#7C3AED';
+                itemSelect.appendChild(option);
+            });
+        }
+
+        // Add custom item
+        document.getElementById('addCustomItemBtn').addEventListener('click', function() {
+            const name = document.getElementById('customItemName').value.trim();
+            const price = parseInt(document.getElementById('customItemPrice').value);
+            const unit = document.getElementById('customItemUnit').value;
+            
+            if (!name || !price || price <= 0) {
+                alert('กรุณากรอกชื่อรายการและราคาให้ถูกต้อง');
+                return;
+            }
+            
+            // Check if item already exists
+            if (customItems.some(item => item.name === name)) {
+                alert('รายการนี้มีอยู่แล้ว');
+                return;
+            }
+            
+            const newItem = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                unit: unit
+            };
+            
+            customItems.push(newItem);
+            localStorage.setItem('bphoto_custom_items', JSON.stringify(customItems));
+            updateItemDropdown();
+            
+            // Clear form
+            document.getElementById('customItemName').value = '';
+            document.getElementById('customItemPrice').value = '';
+            document.getElementById('customItemUnit').value = 'ไฟล์';
+            
+            alert('เพิ่มรายการใหม่เรียบร้อยแล้ว');
+        });
+
+        // Show custom items modal
+        document.getElementById('showCustomItemsBtn').addEventListener('click', function() {
+            updateCustomItemsList();
+            document.getElementById('customItemsModal').classList.remove('hidden');
+        });
+
+        // Close modal
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
+            document.getElementById('customItemsModal').classList.add('hidden');
+        });
+
+        // Close summary modal
+        document.getElementById('closeSummaryModalBtn').addEventListener('click', function() {
+            document.getElementById('receiptSummaryModal').classList.add('hidden');
+        });
+
+        // Cancel save
+        document.getElementById('cancelSaveBtn').addEventListener('click', function() {
+            document.getElementById('receiptSummaryModal').classList.add('hidden');
+        });
+
+        // Update custom items list in modal
+        function updateCustomItemsList() {
+            const customItemsList = document.getElementById('customItemsList');
+            
+            if (customItems.length === 0) {
+                customItemsList.innerHTML = '<p class="text-gray-500 italic text-center py-4">ยังไม่มีรายการที่เพิ่มเอง</p>';
+                return;
+            }
+            
+            customItemsList.innerHTML = '';
+            customItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex items-center justify-between p-3 bg-purple-50 rounded-lg border';
+                itemDiv.innerHTML = `
+                    <div class="flex-1">
+                        <span class="font-medium text-gray-800">${item.name}</span>
+                        <span class="text-gray-600 ml-2">${item.price} บาท/${item.unit}</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="editCustomItem(${item.id})" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">แก้ไข</button>
+                        <button onclick="deleteCustomItem(${item.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">ลบ</button>
+                    </div>
+                `;
+                customItemsList.appendChild(itemDiv);
+            });
+        }
+
+        // Edit custom item
+        function editCustomItem(id) {
+            const item = customItems.find(item => item.id === id);
+            if (!item) return;
+            
+            const newName = prompt('แก้ไขชื่อรายการ:', item.name);
+            if (!newName || newName.trim() === '') return;
+            
+            const newPrice = prompt('แก้ไขราคา (บาท):', item.price);
+            if (!newPrice || parseInt(newPrice) <= 0) return;
+            
+            const newUnit = prompt('แก้ไขหน่วย (ไฟล์/โหล/รูป/ชิ้น/ครั้ง):', item.unit);
+            if (!newUnit || newUnit.trim() === '') return;
+            
+            item.name = newName.trim();
+            item.price = parseInt(newPrice);
+            item.unit = newUnit.trim();
+            
+            localStorage.setItem('bphoto_custom_items', JSON.stringify(customItems));
+            updateItemDropdown();
+            updateCustomItemsList();
+        }
+
+        // Delete custom item
+        function deleteCustomItem(id) {
+            if (!confirm('คุณต้องการลบรายการนี้หรือไม่?')) return;
+            
+            customItems = customItems.filter(item => item.id !== id);
+            localStorage.setItem('bphoto_custom_items', JSON.stringify(customItems));
+            updateItemDropdown();
+            updateCustomItemsList();
+        }
+
+        // Update price when item is selected
+        document.getElementById('itemSelect').addEventListener('change', function() {
+            const selectedValue = this.value;
+            if (selectedValue) {
+                const [item, price, unit] = selectedValue.split('|');
+                document.getElementById('priceInput').value = price;
+            } else {
+                document.getElementById('priceInput').value = '';
+            }
+        });
+
+        // Add item to receipt
+        document.getElementById('addItemBtn').addEventListener('click', function() {
+            const itemSelect = document.getElementById('itemSelect');
+            const quantitySelect = document.getElementById('quantitySelect');
+            const priceInput = document.getElementById('priceInput');
+            
+            if (!itemSelect.value || !quantitySelect.value || !priceInput.value) {
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+                return;
+            }
+            
+            const [itemName, price, unit] = itemSelect.value.split('|');
+            const quantity = parseInt(quantitySelect.value);
+            const unitPrice = parseInt(priceInput.value);
+            const totalPrice = quantity * unitPrice;
+            
+            const newItem = {
+                id: ++itemCounter,
+                name: itemName,
+                quantity: quantity,
+                unit: unit,
+                price: unitPrice,
+                total: totalPrice
+            };
+            
+            receiptItems.push(newItem);
+            updateReceiptTable();
+            updateShipping();
+            updateTotal();
+            updateSummary();
+            
+            // Reset form
+            itemSelect.value = '';
+            quantitySelect.value = '1';
+            priceInput.value = '';
+        });
+
+        // Update receipt table
+        function updateReceiptTable() {
+            const tbody = document.getElementById('receiptTableBody');
+            tbody.innerHTML = '';
+            
+            receiptItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="border border-gray-300 px-4 py-3">${item.name}</td>
+                    <td class="border border-gray-300 px-4 py-3 text-center">${item.quantity}${item.unit === 'ไฟล์' ? ' ไฟล์' : ' ' + item.unit}</td>
+                    <td class="border border-gray-300 px-4 py-3 text-center">${item.price}</td>
+                    <td class="border border-gray-300 px-4 py-3 text-center">${item.total}</td>
+                    <td class="border border-gray-300 px-4 py-3 text-center no-print">
+                        <button onclick="editItem(${item.id})" class="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-sm mr-1">แก้ไข</button>
+                        <button onclick="deleteItem(${item.id})" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm">ลบ</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Update shipping logic
+        function updateShipping() {
+            const shippingRow = document.getElementById('shippingRow');
+            const hasEditingItems = receiptItems.some(item => item.name === 'ตัดต่อรูป ไฟล์ Jpg.');
+            const hasPrintingItems = receiptItems.some(item => item.name.includes('อัดรูป'));
+            
+            // Show shipping if: only editing items OR (editing + printing) OR only printing
+            if (receiptItems.length > 0 && (hasEditingItems || hasPrintingItems)) {
+                // Hide shipping if ONLY editing items (no printing)
+                if (hasEditingItems && !hasPrintingItems) {
+                    shippingRow.classList.add('hidden');
+                } else {
+                    shippingRow.classList.remove('hidden');
+                }
+            } else {
+                shippingRow.classList.add('hidden');
+            }
+        }
+
+        // Update total
+        function updateTotal() {
+            let total = receiptItems.reduce((sum, item) => sum + item.total, 0);
+            
+            // Add shipping if visible
+            const shippingRow = document.getElementById('shippingRow');
+            if (!shippingRow.classList.contains('hidden')) {
+                total += 50;
+            }
+            
+            document.getElementById('totalAmount').textContent = total + ' บาท';
+            document.getElementById('totalInThai').textContent = numberToThai(total);
+        }
+
+        // Update summary
+        function updateSummary() {
+            const summaryList = document.getElementById('summaryList');
+            
+            if (receiptItems.length === 0) {
+                summaryList.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="text-6xl mb-4">📝</div>
+                        <p class="text-gray-500 italic text-lg">ยังไม่มีรายการที่เลือก</p>
+                        <p class="text-gray-400 text-sm mt-2">เลือกรายการเพื่อดูสรุปที่นี่</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let summaryHTML = `
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">รายการ</span>
+                            <div class="flex space-x-8">
+                                <span class="font-semibold">จำนวน</span>
+                                <span class="font-semibold">ราคา</span>
+                                <span class="font-semibold">รวม</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+            `;
+            
+            receiptItems.forEach((item, index) => {
+                const bgColor = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                summaryHTML += `
+                    <div class="${bgColor} px-4 py-3 hover:bg-blue-50 transition-colors duration-200">
+                        <div class="flex justify-between items-center">
+                            <div class="flex-1">
+                                <span class="font-medium text-gray-800">${item.name}</span>
+                            </div>
+                            <div class="flex space-x-8 text-right">
+                                <span class="w-16 text-gray-600">${item.quantity}${item.unit === 'ไฟล์' ? ' ไฟล์' : ' ' + item.unit}</span>
+                                <span class="w-16 text-gray-600">${item.price}฿</span>
+                                <span class="w-16 font-semibold text-blue-600">${item.total}฿</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Add shipping if visible
+            const shippingRow = document.getElementById('shippingRow');
+            if (!shippingRow.classList.contains('hidden')) {
+                const bgColor = receiptItems.length % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                summaryHTML += `
+                    <div class="${bgColor} px-4 py-3 hover:bg-yellow-50 transition-colors duration-200 border-t-2 border-yellow-200">
+                        <div class="flex justify-between items-center">
+                            <div class="flex-1">
+                                <span class="font-medium text-gray-800 flex items-center">
+                                    <span class="text-yellow-500 mr-2">🚚</span>
+                                    ค่าจัดส่งพัสดุ J&T Express
+                                </span>
+                            </div>
+                            <div class="flex space-x-8 text-right">
+                                <span class="w-16 text-gray-600">-</span>
+                                <span class="w-16 text-gray-600">50฿</span>
+                                <span class="w-16 font-semibold text-yellow-600">50฿</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Calculate total
+            let total = receiptItems.reduce((sum, item) => sum + item.total, 0);
+            if (!shippingRow.classList.contains('hidden')) {
+                total += 50;
+            }
+            
+            summaryHTML += `
+                    </div>
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold flex items-center">
+                                <span class="mr-2">💰</span>
+                                ยอดรวมทั้งหมด
+                            </span>
+                            <span class="text-2xl font-bold">${total}฿</span>
+                        </div>
+                        <div class="text-center mt-2 text-green-100">
+                            <span class="text-sm">${numberToThai(total)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            summaryList.innerHTML = summaryHTML;
+        }
+
+        // Delete item
+        function deleteItem(id) {
+            receiptItems = receiptItems.filter(item => item.id !== id);
+            updateReceiptTable();
+            updateShipping();
+            updateTotal();
+            updateSummary();
+        }
+
+        // Edit item
+        function editItem(id) {
+            const item = receiptItems.find(item => item.id === id);
+            if (!item) return;
+            
+            const newQuantity = prompt('แก้ไขจำนวน (1-10):', item.quantity);
+            if (newQuantity && newQuantity >= 1 && newQuantity <= 10) {
+                item.quantity = parseInt(newQuantity);
+                item.total = item.quantity * item.price;
+                updateReceiptTable();
+                updateShipping();
+                updateTotal();
+                updateSummary();
+            }
+        }
+
+        // Clear all
+        document.getElementById('clearAllBtn').addEventListener('click', function() {
+            if (confirm('คุณต้องการล้างรายการทั้งหมดหรือไม่?')) {
+                receiptItems = [];
+                updateReceiptTable();
+                updateShipping();
+                updateTotal();
+                updateSummary();
+            }
+        });
+
+        // Show summary modal when save button is clicked
+        document.getElementById('saveReceiptBtn').addEventListener('click', function() {
+            if (receiptItems.length === 0) {
+                alert('กรุณาเลือกรายการก่อนบันทึก');
+                return;
+            }
+            
+            // Copy summary content to modal
+            const originalSummary = document.getElementById('summaryList');
+            const modalSummary = document.getElementById('modalSummaryContent');
+            modalSummary.innerHTML = originalSummary.innerHTML;
+            
+            // Show modal
+            document.getElementById('receiptSummaryModal').classList.remove('hidden');
+        });
+
+
+
+        // Initialize
+        updateItemDropdown();
+        updateTotal();
+        updateSummary();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962731e431b65fba',t:'MTc1MzA2NDE3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
