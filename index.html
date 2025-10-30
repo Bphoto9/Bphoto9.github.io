@@ -1,12 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ใบเสร็จ B Photo - ตัดต่อรีทัช รูปติดบัตร ออนไลน์</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://html2canvas.herokuapp.com/dist/html2canvas.min.js"></script>
-    <style>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ทำใบเสร็จ - B Photo ตัดต่อรีทัช รูปติดบัตร ออนไลน์</title><!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg"><!-- Apple Touch Icons for iOS -->
+  <link rel="apple-touch-icon" sizes="57x57" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="60x60" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg"><!-- Apple Mobile Web App -->
+  <meta name="apple-mobile-web-app-title" content="ทำใบเสร็จ">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"><!-- Android/Chrome -->
+  <meta name="application-name" content="ทำใบเสร็จ">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#1e40af">
+  <meta name="msapplication-TileColor" content="#1e40af">
+  <meta name="msapplication-TileImage" content="https://uppic.cloud/ib/8nXBcU5kYD7PO98_1761230726.jpg"><!-- Web App Manifest -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuC4l+C4s+C5g+C4muC5gOC4quC4o+C4seC4iCIsCiAgInNob3J0X25hbWUiOiAi4LiX4Liz4LmD4Lia4LmA4Liq4Lij4Lix4LiIIiwKICAiZGVzY3JpcHRpb24iOiAi4LmA4Lio4Lij4Liy4LiV4Liy4LiB4Lij4LmM4Liy4LiZ4LiB4Liy4Lij4LiX4Liz4LmD4Lia4LmA4Liq4Lij4Lix4LiIIEIgUGhvdG8iLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgInRoZW1lX2NvbG9yIjogIiMxZTQwYWYiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vdXBwaWMuY2xvdWQvaWIvOG5YQmNVNWtZRDdQTzk4XzE3NjEyMzA3MjYuanBnIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9qcGVnIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL3VwcGljLmNsb3VkL2liLzhuWEJjVTVrWUQ3UE85OF8xNzYxMjMwNzI2LmpwZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvanBlZyIKICAgIH0KICBdCn0="><!-- PWA Meta Tags -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://html2canvas.herokuapp.com/dist/html2canvas.min.js"></script>
+  <style>
         @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Sarabun', sans-serif; }
         .receipt-container { background: white; }
@@ -14,223 +37,129 @@
             .no-print { display: none !important; }
         }
     </style>
-</head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4">
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <div class="text-center">
-                <h1 class="text-3xl font-bold text-blue-800 mb-2">B Photo</h1>
-                <p class="text-lg text-gray-600">ตัดต่อรีทัช รูปติดบัตร ออนไลน์</p>
-                <div class="w-24 h-1 bg-blue-500 mx-auto mt-3 rounded"></div>
-            </div>
-        </div>
-
-        <!-- Receipt Container -->
-        <div id="receiptContainer" class="receipt-container rounded-lg shadow-lg p-6 mb-6">
-            <div class="border-b-2 border-blue-200 pb-4 mb-6">
-                <h2 class="text-2xl font-semibold text-center text-blue-800">ใบเสร็จรับเงิน</h2>
-                <p class="text-center text-gray-600 mt-2">Receipt</p>
-            </div>
-
-            <!-- Receipt Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300">
-                    <thead>
-                        <tr class="bg-blue-50">
-                            <th class="border border-gray-300 px-4 py-3 text-left font-semibold">รายการ</th>
-                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">จำนวน</th>
-                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">ราคา/บาท</th>
-                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">จำนวนเงิน</th>
-                            <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-16 no-print">จัดการ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="receiptTableBody">
-                        <!-- Rows will be added dynamically -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Shipping Row -->
-            <div class="mt-4">
-                <table class="w-full border-collapse border border-gray-300">
-                    <tbody>
-                        <tr id="shippingRow" class="bg-yellow-50 hidden">
-                            <td class="border border-gray-300 px-4 py-3">ค่าจัดส่งพัสดุ J&T Express</td>
-                            <td class="border border-gray-300 px-4 py-3 text-center">-</td>
-                            <td class="border border-gray-300 px-4 py-3 text-center">50</td>
-                            <td class="border border-gray-300 px-4 py-3 text-center">50</td>
-                            <td class="border border-gray-300 px-4 py-3 text-center no-print"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Total Section -->
-            <div class="mt-6 bg-blue-50 p-4 rounded-lg">
-                <div class="flex justify-between items-center text-xl font-semibold">
-                    <span>รวมทั้งหมด:</span>
-                    <span id="totalAmount">0 บาท</span>
-                </div>
-                <div class="mt-2 text-center text-gray-700">
-                    <span id="totalInThai">ศูนย์บาทถ้วน</span>
-                </div>
-            </div>
-
-            <!-- Summary Section -->
-            <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
-                <h3 class="text-xl font-semibold mb-4 text-blue-800 flex items-center">
-                    <span class="bg-blue-100 p-2 rounded-full mr-3">📋</span>
-                    สรุปรายการใบเสร็จ
-                </h3>
-                <div id="summaryList" class="text-gray-700">
-                    <div class="text-center py-8">
-                        <div class="text-6xl mb-4">📝</div>
-                        <p class="text-gray-500 italic text-lg">ยังไม่มีรายการที่เลือก</p>
-                        <p class="text-gray-400 text-sm mt-2">เลือกรายการเพื่อดูสรุปที่นี่</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Control Panel -->
-        <div class="bg-white rounded-lg shadow-lg p-6 no-print">
-            <h3 class="text-xl font-semibold mb-4 text-gray-800">เพิ่มรายการ</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">รายการ</label>
-                    <select id="itemSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">เลือกรายการ</option>
-                        <option value="ตัดต่อรูป ไฟล์ Jpg.|125|ไฟล์">ตัดต่อรูป ไฟล์ Jpg.</option>
-                        <option value="ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)|280|ไฟล์">ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)</option>
-                        <option value="อัดรูป 1 นิ้ว|20|โหล">อัดรูป 1 นิ้ว</option>
-                        <option value="อัดรูป 1.5 นิ้ว|25|โหล">อัดรูป 1.5 นิ้ว</option>
-                        <option value="อัดรูป 2 นิ้ว|30|โหล">อัดรูป 2 นิ้ว</option>
-                        <option value="อัดรูป 1x1.5 นิ้ว|30|โหล">อัดรูป 1x1.5 นิ้ว</option>
-                        <option value="อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)|30|โหล">อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)</option>
-                        <option value="อัดรูป 8 x 13 เซนติเมตร|5|รูป">อัดรูป 8 x 13 เซนติเมตร</option>
-                        <option value="อัดรูป 2x2 นิ้ว|30|โหล">อัดรูป 2x2 นิ้ว</option>
-                        <option value="อัดรูป 4x6 นิ้ว|5|รูป">อัดรูป 4x6 นิ้ว</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">จำนวน</label>
-                    <select id="quantitySelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">ราคา/บาท</label>
-                    <input type="number" id="priceInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly>
-                </div>
-                
-                <div class="flex items-end">
-                    <button id="addItemBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
-                        เพิ่มรายการ
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Custom Item Management -->
-            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-                <h4 class="text-lg font-semibold mb-3 text-gray-800">จัดการรายการและราคา</h4>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">ชื่อรายการใหม่</label>
-                        <input type="text" id="customItemName" placeholder="เช่น อัดรูป 5x7 นิ้ว" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">ราคา (บาท)</label>
-                        <input type="number" id="customItemPrice" placeholder="0" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">หน่วย</label>
-                        <select id="customItemUnit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="ไฟล์">ไฟล์</option>
-                            <option value="โหล">โหล</option>
-                            <option value="รูป">รูป</option>
-                            <option value="ชิ้น">ชิ้น</option>
-                            <option value="ครั้ง">ครั้ง</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="flex gap-2 mb-4">
-                    <button id="addCustomItemBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
-                        ➕ เพิ่มรายการใหม่
-                    </button>
-                    <button id="showCustomItemsBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
-                        📋 จัดการรายการที่มี
-                    </button>
-                </div>
-            </div>
-            
-            <div class="flex gap-4">
-                <button id="saveReceiptBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200">
-                    💾 บันทึกภาพ
-                </button>
-                <button id="clearAllBtn" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-md transition duration-200">
-                    🗑️ ล้างทั้งหมด
-                </button>
-            </div>
-        </div>
-
-        <!-- Custom Items Management Modal -->
-        <div id="customItemsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 no-print">
-            <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-96 overflow-y-auto">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-semibold text-gray-800">จัดการรายการและราคา</h3>
-                            <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-                        </div>
-                        <div id="customItemsList" class="space-y-2">
-                            <!-- Custom items will be listed here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Receipt Summary Modal -->
-        <div id="receiptSummaryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 no-print">
-            <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-2xl font-semibold text-blue-800">สรุปรายการใบเสร็จ</h3>
-                            <button id="closeSummaryModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-                        </div>
-                        
-                        <!-- Summary Content -->
-                        <div id="modalSummaryContent" class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
-                            <!-- Summary will be copied here -->
-                        </div>
-                        
-                        <!-- Modal Actions -->
-                        <div class="flex justify-center gap-4 mt-6">
-                            <button id="cancelSaveBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 text-lg">
-                                ❌ ปิด
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4">
+  <div class="max-w-4xl mx-auto"><!-- Header -->
+   <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+    <div class="text-center">
+     <h1 class="text-3xl font-bold text-blue-800 mb-2">B Photo</h1>
+     <p class="text-lg text-gray-600">ตัดต่อรีทัช รูปติดบัตร ออนไลน์</p>
+     <div class="w-24 h-1 bg-blue-500 mx-auto mt-3 rounded"></div>
     </div>
-
-    <script>
+   </div><!-- Receipt Container -->
+   <div id="receiptContainer" class="receipt-container rounded-lg shadow-lg p-6 mb-6">
+    <div class="border-b-2 border-blue-200 pb-4 mb-6">
+     <h2 class="text-2xl font-semibold text-center text-blue-800">ใบเสร็จรับเงิน</h2>
+     <p class="text-center text-gray-600 mt-2">Receipt</p>
+    </div><!-- Receipt Table -->
+    <div class="overflow-x-auto">
+     <table class="w-full border-collapse border border-gray-300">
+      <thead>
+       <tr class="bg-blue-50">
+        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">รายการ</th>
+        <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">จำนวน</th>
+        <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">ราคา/บาท</th>
+        <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-24">จำนวนเงิน</th>
+        <th class="border border-gray-300 px-4 py-3 text-center font-semibold w-16 no-print">จัดการ</th>
+       </tr>
+      </thead>
+      <tbody id="receiptTableBody"><!-- Rows will be added dynamically -->
+      </tbody>
+     </table>
+    </div><!-- Shipping Row -->
+    <div class="mt-4">
+     <table class="w-full border-collapse border border-gray-300">
+      <tbody>
+       <tr id="shippingRow" class="bg-yellow-50 hidden">
+        <td class="border border-gray-300 px-4 py-3">ค่าจัดส่งพัสดุ J&amp;T Express</td>
+        <td class="border border-gray-300 px-4 py-3 text-center">-</td>
+        <td class="border border-gray-300 px-4 py-3 text-center">50</td>
+        <td class="border border-gray-300 px-4 py-3 text-center">50</td>
+        <td class="border border-gray-300 px-4 py-3 text-center no-print"></td>
+       </tr>
+      </tbody>
+     </table>
+    </div><!-- Total Section -->
+    <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+     <div class="flex justify-between items-center text-xl font-semibold"><span>รวมทั้งหมด:</span> <span id="totalAmount">0 บาท</span>
+     </div>
+     <div class="mt-2 text-center text-gray-700"><span id="totalInThai">ศูนย์บาทถ้วน</span>
+     </div>
+    </div><!-- Summary Section -->
+    <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
+     <h3 class="text-xl font-semibold mb-4 text-blue-800 flex items-center"><span class="bg-blue-100 p-2 rounded-full mr-3">📋</span> สรุปรายการใบเสร็จ</h3>
+     <div id="summaryList" class="text-gray-700">
+      <div class="text-center py-8">
+       <div class="text-6xl mb-4">
+        📝
+       </div>
+       <p class="text-gray-500 italic text-lg">ยังไม่มีรายการที่เลือก</p>
+       <p class="text-gray-400 text-sm mt-2">เลือกรายการเพื่อดูสรุปที่นี่</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Control Panel -->
+   <div class="bg-white rounded-lg shadow-lg p-6 no-print">
+    <h3 class="text-xl font-semibold mb-4 text-gray-800">เพิ่มรายการ</h3>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+     <div><label class="block text-sm font-medium text-gray-700 mb-2">รายการ</label> <select id="itemSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">เลือกรายการ</option> <option value="ตัดต่อรูป ไฟล์ Jpg.|125|ไฟล์">ตัดต่อรูป ไฟล์ Jpg.</option> <option value="ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)|280|ไฟล์">ตัดต่อรูป ไฟล์ Jpg. (คิวด่วน)</option> <option value="อัดรูป 1 นิ้ว|20|โหล">อัดรูป 1 นิ้ว</option> <option value="อัดรูป 1.5 นิ้ว|25|โหล">อัดรูป 1.5 นิ้ว</option> <option value="อัดรูป 2 นิ้ว|30|โหล">อัดรูป 2 นิ้ว</option> <option value="อัดรูป 1x1.5 นิ้ว|30|โหล">อัดรูป 1x1.5 นิ้ว</option> <option value="อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)|30|โหล">อัดรูป 3.5 x 4.5 เซนติเมตร (วีซ่าเกาหลี)</option> <option value="อัดรูป 8 x 13 เซนติเมตร|5|รูป">อัดรูป 8 x 13 เซนติเมตร</option> <option value="อัดรูป 2x2 นิ้ว|30|โหล">อัดรูป 2x2 นิ้ว</option> <option value="อัดรูป 4x6 นิ้ว|5|รูป">อัดรูป 4x6 นิ้ว</option> </select>
+     </div>
+     <div><label class="block text-sm font-medium text-gray-700 mb-2">จำนวน</label> <select id="quantitySelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> </select>
+     </div>
+     <div><label class="block text-sm font-medium text-gray-700 mb-2">ราคา/บาท</label> <input type="number" id="priceInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly>
+     </div>
+     <div class="flex items-end"><button id="addItemBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"> เพิ่มรายการ </button>
+     </div>
+    </div><!-- Custom Item Management -->
+    <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+     <h4 class="text-lg font-semibold mb-3 text-gray-800">จัดการรายการและราคา</h4>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div><label class="block text-sm font-medium text-gray-700 mb-2">ชื่อรายการใหม่</label> <input type="text" id="customItemName" placeholder="เช่น อัดรูป 5x7 นิ้ว" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div><label class="block text-sm font-medium text-gray-700 mb-2">ราคา (บาท)</label> <input type="number" id="customItemPrice" placeholder="0" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div><label class="block text-sm font-medium text-gray-700 mb-2">หน่วย</label> <select id="customItemUnit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="ไฟล์">ไฟล์</option> <option value="โหล">โหล</option> <option value="รูป">รูป</option> <option value="ชิ้น">ชิ้น</option> <option value="ครั้ง">ครั้ง</option> </select>
+      </div>
+     </div>
+     <div class="flex gap-2 mb-4"><button id="addCustomItemBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"> ➕ เพิ่มรายการใหม่ </button> <button id="showCustomItemsBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"> 📋 จัดการรายการที่มี </button>
+     </div>
+    </div>
+    <div class="flex gap-4"><button id="saveReceiptBtn" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md transition duration-200"> 💾 บันทึกภาพ </button> <button id="clearAllBtn" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-md transition duration-200"> 🗑️ ล้างทั้งหมด </button>
+    </div>
+   </div><!-- Custom Items Management Modal -->
+   <div id="customItemsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 no-print">
+    <div class="flex items-center justify-center min-h-screen p-4">
+     <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-96 overflow-y-auto">
+      <div class="p-6">
+       <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-800">จัดการรายการและราคา</h3><button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+       </div>
+       <div id="customItemsList" class="space-y-2"><!-- Custom items will be listed here -->
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Receipt Summary Modal -->
+   <div id="receiptSummaryModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 no-print">
+    <div class="flex items-center justify-center min-h-screen p-4">
+     <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+       <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-semibold text-blue-800">สรุปรายการใบเสร็จ</h3><button id="closeSummaryModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+       </div><!-- Summary Content -->
+       <div id="modalSummaryContent" class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200"><!-- Summary will be copied here -->
+       </div><!-- Modal Actions -->
+       <div class="flex justify-center gap-4 mt-6"><button id="cancelSaveBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 text-lg"> ❌ ปิด </button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
         let receiptItems = [];
         let itemCounter = 0;
         let customItems = JSON.parse(localStorage.getItem('bphoto_custom_items')) || [];
@@ -685,5 +614,5 @@
         updateTotal();
         updateSummary();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962731e431b65fba',t:'MTc1MzA2NDE3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9969db37277fb403',t:'MTc2MTgxNjIzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
